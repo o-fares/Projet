@@ -39,12 +39,6 @@ class TestPaire(unittest.TestCase):
         expected = 3
         self.assertTrue(value == expected)
 
-    def testCloner(self):
-        a = Paire(1,2)
-        b = a.cloner()
-        self.assertTrue(a.eqPaire(b))
-
-
 
 if __name__ == '__main__':
     unittest.main()
