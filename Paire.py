@@ -5,28 +5,28 @@ class Paire():
         self.element = a
         self.priorite = b
         
-    def getX(self):
+    def getElement(self):
         #Premier élément de la paire
         return self.element
     
-    def getY(self):
+    def getPriorite(self):
         return self.priorite
     
-    def setX(self, x):
+    def setElement(self, x):
         #Modification de la première valeur de la paire
         self.element = x
         
-    def setY(self, y):
+    def setPriorite(self, y):
         #Modification de la deuxième valeur de la paire
         self.priorite = y
         
     def eqPaire(q, p):
         #Renvoie True si les deux paires sont égales, False sinon
-        return (q.getX() == p.getX()) and (q.getY() == p.getY())
+        return (q.getElement() == p.getElement()) and (q.getPriorite() == p.getPriorite())
     
     def afficher(self):
         """affiche la paire"""
-        return (self.getX(), self.getY())
+        return (self.getElement(), self.getPrirorite())
     
     def cloner(self):
-        return (Paire(self.getX(),self.getY()))
+        return (Paire(self.getElement(),self.getPriorite()))
