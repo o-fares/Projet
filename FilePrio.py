@@ -10,11 +10,7 @@ class FilePrio:
         """renvoie True si la fileprio est vide"""
         return self.fileprio == []
 
-    def getter(self):
-        """renvoie la fileprio"""
-        return self.fileprio
-
-    def afficher(self):
+    def afficher2(self):
         """afficher la file prio"""
         for i in range(len(self.fileprio)):
             print([(self.fileprio[i].getElement(), self.fileprio[i].getPriorite())])
@@ -41,6 +37,6 @@ class FilePrio:
 a = FilePrio([Paire("C", 1), Paire("A", 2), Paire("B", 5)])
 b = Paire("B", 6)
 c = FilePrio([])
-print(c.ajout2(b))
-print(c.afficher())
-print(c.getter())
+c.ajout(b)
+c.afficher2()
+a.queueFilePrio().afficher()
