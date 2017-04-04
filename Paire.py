@@ -10,6 +10,17 @@ class Paire():
         return self.element
     
     def getY(self):
+        return self.priorité
+    
+    def setX(self,x):
+        #Modification de la première valeur de la paire
+        self.element = x
+        
+    def setY(self,y):
+        #Modification de la deuxième valeur de la paire
+        self.priorité = y
+        
+    def eqpaire(q,p):
         return self.priorite
     
     def setX(self, x):
