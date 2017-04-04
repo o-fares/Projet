@@ -1,19 +1,6 @@
 # Author : Mounir Bennadji
 # File : Classe Arbre.py
 
-class Noeud:
-    """classe des noeuds"""
-    def __init__(self, val):
-        self.val = val
-
-    def getVal(self):
-        """renvoie l'étiquette"""
-        return self.val
-
-    def setVal(self, valeur):
-        """attribuer une nouvelle valeur à l'étiquette"""
-        self.val = valeur
-
 class Arbre():
 
     def __init__(self, A1, n, A2):
