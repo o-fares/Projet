@@ -19,14 +19,7 @@ class Paire():
     def setPriorite(self, y):
         #Modification de la deuxième valeur de la paire
         self.priorite = y
-        
-    def eqPaire(q, p):
-        #Renvoie True si les deux paires sont égales, False sinon
-        return (q.getElement() == p.getElement()) and (q.getPriorite() == p.getPriorite())
     
     def afficher(self):
         """affiche la paire"""
         print((self.getElement(), self.getPriorite()))
-    
-    def cloner(self):
-        return (Paire(self.getElement(),self.getPriorite()))
