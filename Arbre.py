@@ -1,8 +1,5 @@
-# Author : Mounir Bennadji
-# File : Classe Arbre.py
-
+from Noeud import *
 class Arbre():
-
     def __init__(self, A1, n, A2):
         self.fg = A1
         self.fd = A2
@@ -10,15 +7,15 @@ class Arbre():
 
     def estVide(self):
         """Renvoie True si l'arbre est vide, False sinon"""
-        return (self.getFd() == None) and (self.getFg() == None) and (self.racine == None)
+        return (self.fd is None) and (self.fg is None) and (self.racine is None)
 
-    def setNoeud(self, A):
+    def setNoeud(self,A):
         self.racine = A
 
-    def setFd(self, A):
+    def setFd(self,A):
         self.fd = A
 
-    def setFg(self, B):
+    def setFg(self,B):
         self.fg = B
 
     def getFd(self):
@@ -42,7 +39,10 @@ class Arbre():
         return self.racine.getVal()
 
     def estFeuille(self):
-        """Vérifie si un arbre est une feuille"""
-        assert not self.estVide()
-        return self.fd.estVide() and self.fg.estVide()
+        """Return True si l'arbre se réduit à une feuille """
+        if self.estVide():
+            return False
+        else :
+            return self.getFd().estVide() and self.getFg().estVide()
+
 
