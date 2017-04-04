@@ -26,7 +26,7 @@ class Paire():
     
     def afficher(self):
         """affiche la paire"""
-        return (self.getElement(), self.getPriorite())
+        print((self.getElement(), self.getPriorite()))
     
     def cloner(self):
         return (Paire(self.getElement(),self.getPriorite()))
