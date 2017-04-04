@@ -9,13 +9,16 @@ class Arbre():
         """Renvoie True si l'arbre est vide, False sinon"""
         return (self.fd is None) and (self.fg is None) and (self.racine is None)
 
-    def setNoeud(self,A):
+    def setNoeud(self, A):
+        """ change la valeur du noeud"
         self.racine = A
 
-    def setFd(self,A):
+    def setFd(self, A):
+        """change la valeur du fils droit"""
         self.fd = A
 
-    def setFg(self,B):
+    def setFg(self, B):
+        """change la valeur du fils gauche"""
         self.fg = B
 
     def getFd(self):
