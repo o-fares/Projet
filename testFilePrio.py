@@ -57,7 +57,25 @@ class TestFilePrio(unittest.TestCase):
         expected2 = 1
         self.assertTrue(value1 == expected1 and value2 == expected2 and value2 <= a.fileprio[1].getPriorite())
 
+    def testAjoutMax(self):
+        a = FilePrio([Paire('A', 2), Paire('B', 3)])
+        c = Paire('C', 4)
+        a.ajout(c)
+        value1 = a.fileprio[-1].getElement()
+        value2 = a.fileprio[-1].getPriorite()
+        expected1 = 'C'
+        expected2 = 4
+        self.assertTrue(value1 is expected1 and value2 is expected2)
 
+    def testAjoutQcq(self):
+        a = FilePrio([Paire('A', 2), Paire('B', 3)])
+        c = Paire('C', 3)
+        a.ajout(c)
+        value1 = a.fileprio[1].getElement()
+        value2 = a.fileprio[1].getPriorite()
+        expected1 = 'C'
+        expected2 = 3
+        self.assertTrue(value1 is expected1 and value2 is expected2)
 
 
 
