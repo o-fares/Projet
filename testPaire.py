@@ -18,14 +18,8 @@ class TestPaire(unittest.TestCase):
         value = b.getElement()
         self.assertTrue( value == expected )
 
-    def testEqPaire(self):
-        a = Paire(6,3)
-        b = Paire(6,3)
-        self.assertTrue(a.eqPaire(b))
-
     def testSetElement(self):
         b = Paire(2,3)
-        a = Paire(6,3)
         b.setElement(6)
         value = b.element
         expected = 6
@@ -33,7 +27,6 @@ class TestPaire(unittest.TestCase):
 
     def testSetPriorite(self):
         m = Paire(12,14)
-        n = Paire(12,3)
         m.setPriorite(3)
         value = m.priorite
         expected = 3
