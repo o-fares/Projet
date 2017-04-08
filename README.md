@@ -7,8 +7,8 @@ Réaliser le codage de Huffmann
 - classes Paire, FilePrio, Arbre ✓
 - classe de tests pour chacune des classes ✓
 - module compresse qui donne les fonctions permettant de lire un texte/le compresser/le décompresser 
-/!\ ce n'est pas une classe
-  détail des fonctions:
+/!\ ce n'est pas une classe   
+détail des fonctions:
     - lireFichier(nomFichier)
     - creerTabFreq(texte, nbcar)
     - creerFilePriorite(tabfreq, nbcar)
