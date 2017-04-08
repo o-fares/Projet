@@ -10,7 +10,7 @@ class Arbre():
         return (self.fd is None) and (self.fg is None) and (self.racine is None)
 
     def setNoeud(self, A):
-        """ change la valeur du noeud"
+        """ change la valeur du noeud"""
         self.racine = A
 
     def setFd(self, A):
