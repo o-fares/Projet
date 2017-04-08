@@ -32,3 +32,4 @@ Réaliser le codage de Huffmann
  
 - Apprendre à manipuler des fichiers avec Python: page 107 http://inforef.be/swi/download/apprendre_python3_5.pdf
 - TD arbres: exercices 4 et 5 utiles pour le projet
+- cours sur les arbres: compression de Hufman page 8 à 11 (Ametice)
