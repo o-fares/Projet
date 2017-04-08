@@ -16,7 +16,7 @@ class FilePrio:
             print([(self.fileprio[i].getElement(), self.fileprio[i].getPriorite())])
 
     def teteFilePrio(self):
-        """Renvoie le premier éléement de la file""""
+        """Renvoie le premier éléement de la file"""
         assert not self.estVide()
         return self.fileprio[0]
 
@@ -26,7 +26,7 @@ class FilePrio:
         self.fileprio = self.fileprio[1:]
 
     def ajout(self, paire):
-        """Ajoute une paire à la file, la paire est ajouté devant le premier élément avec une priorité inférieure ou égale"""C
+        """Ajoute une paire à la file, la paire est ajouté devant le premier élément avec une priorité inférieure ou égale"""
         if self.fileprio ==  []:
             self.fileprio.insert(0,paire)
         else:
