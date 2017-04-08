@@ -39,7 +39,7 @@ class Arbre():
     def getValRac(self):
         """Retourne l'étiquette de la racine"""
         assert (not self.estVide())
-        return self.racine.getVal()
+        return self.racine
 
     def estFeuille(self):
         """Return True si l'arbre se réduit à une feuille """
