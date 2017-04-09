@@ -11,8 +11,11 @@ class FilePrio:
         return self.fileprio == []
 
     def afficher2(self):
-        """afficher la file prio"""
-        for i in range(len(self.fileprio)):
+    """afficher la file prio"""
+    for i in range(len(self.fileprio)):
+        if type(self.fileprio[i].getElement()) == Arbre:
+            print([(self.fileprio[i].getElement().getFg(), self.fileprio[i].getElement().getValRac(), self.fileprio[i].getElement().getFd()), self.fileprio[i].getPriorite()])
+        else:
             print([(self.fileprio[i].getElement(), self.fileprio[i].getPriorite())])
 
     def teteFilePrio(self):
