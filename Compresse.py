@@ -31,7 +31,7 @@ print(creerTabFreq(texte, 'e'))
 
 def creerFilePriorite(tabfreq, char):
     """créer la file de priorité composé d'éléments (arbre du caractère, nb occurences)"""
-    A = Arbre(None, char, None)
+    A = Arbre(None, Noeud(char), None)
     nbcar = tabfreq
     file = FilePrio([])
     file.ajout(Paire(A, nbcar))
