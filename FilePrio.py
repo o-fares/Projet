@@ -19,7 +19,7 @@ class FilePrio:
             print([(self.fileprio[i].getElement(), self.fileprio[i].getPriorite())])
 
     def teteFilePrio(self):
-        """Renvoie le premier éléement de la file"""
+        """Renvoie le premier element de la file"""
         assert not self.estVide()
         return self.fileprio[0]
 
