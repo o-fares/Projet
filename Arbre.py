@@ -10,7 +10,7 @@ class Arbre():
         return (self.fd is None) and (self.fg is None) and (self.racine is None)
 
     def setNoeud(self, A):
-        """ change la valeur du noeud"
+        """ change la valeur du noeud"""
         self.racine = A
 
     def setFd(self, A):
@@ -34,7 +34,7 @@ class Arbre():
     def getRacine(self):
         """Renvoie la racine de l'arbre"""
         assert(not self.estVide())
-        return self.racine
+        return self.racine.getVal()
 
     def getValRac(self):
         """Retourne l'étiquette de la racine"""

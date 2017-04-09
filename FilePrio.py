@@ -11,12 +11,15 @@ class FilePrio:
         return self.fileprio == []
 
     def afficher2(self):
-        """afficher la file prio"""
-        for i in range(len(self.fileprio)):
+    """afficher la file prio"""
+    for i in range(len(self.fileprio)):
+        if type(self.fileprio[i].getElement()) == Arbre:
+            print([(self.fileprio[i].getElement().getFg(), self.fileprio[i].getElement().getValRac(), self.fileprio[i].getElement().getFd()), self.fileprio[i].getPriorite()])
+        else:
             print([(self.fileprio[i].getElement(), self.fileprio[i].getPriorite())])
 
     def teteFilePrio(self):
-        """Renvoie le premier éléement de la file""""
+        """Renvoie le premier element de la file"""
         assert not self.estVide()
         return self.fileprio[0]
 
@@ -26,7 +29,7 @@ class FilePrio:
         self.fileprio = self.fileprio[1:]
 
     def ajout(self, paire):
-        """Ajoute une paire à la file, la paire est ajouté devant le premier élément avec une priorité inférieure ou égale"""C
+        """Ajoute une paire à la file, la paire est ajouté devant le premier élément avec une priorité inférieure ou égale"""
         if self.fileprio ==  []:
             self.fileprio.insert(0,paire)
         else:
