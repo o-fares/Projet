@@ -34,7 +34,7 @@ class Arbre():
     def getRacine(self):
         """Renvoie la racine de l'arbre"""
         assert(not self.estVide())
-        return self.racine.getVal()
+        return self.racine
 
     def getValRac(self):
         """Retourne l'étiquette de la racine"""

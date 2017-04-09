@@ -12,35 +12,41 @@ def lireFichier(nomFichier):
     texte = fo.read()
     return texte
 
-def creerTabFreq(texte, char):
+def creerTabFreq(texte):
     """retourne le nombre d'occurences de la lettre char dans texte"""
-    freq = 0
+    listefreq = [0]*52
     maj = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     min = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     for chr in texte:
-        if chr == char:
-            if chr in maj:
-                freq += 1
-            elif chr in min:
-                freq += 1
-    return freq
+        if chr in maj:
+            listefreq[ord(chr)-65] += 1
+        elif chr in min:
+            listefreq[ord(chr)-71] += 1
+    return listefreq
 
 texte = lireFichier("data.txt")
 
-print(creerTabFreq(texte, 'e'))
+print(creerTabFreq(texte))
 
-def creerFilePriorite(tabfreq, char):
+def creerFilePriorite(tabfreq):
     """créer la file de priorité composé d'éléments (arbre du caractère, nb occurences)"""
-    A = Arbre(None, Noeud(char), None)
-    nbcar = tabfreq
     file = FilePrio([])
-    file.ajout(Paire(A, nbcar))
+    traites = []
+    for char in texte:
+        A = Arbre(None, Noeud(char), None)
+        if ord(char) >= 65 and ord(char)<= 90:
+            nbcar = tabfreq[ord(char) - 65]
+            if ord(char) not in traites:
+                file.ajout(Paire(A, nbcar))
+                traites += [ord(char)]
+        elif ord(char) >= 97 and ord(char) <= 122:
+            nbcar = tabfreq[ord(char) - 71]
+            if ord(char) not in traites:
+                file.ajout(Paire(A, nbcar))
+                traites += [ord(char)]
     return file
 
-file = creerFilePriorite(creerTabFreq(texte, 'e'), 'e')
-print(file)
+file = creerFilePriorite(creerTabFreq(texte))
 
-L = file.afficher2()
 
-A = Arbre(None, None, None)
-print(type(A))
+file.afficher2()
