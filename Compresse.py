@@ -33,7 +33,7 @@ def creerFilePriorite(tabfreq):
     file = FilePrio([])
     traites = []
     for char in texte:
-        A = Arbre(None, Noeud(char), None)
+        A = Arbre(Arbre(None, None, None), Noeud(char), Arbre(None, None, None))
         if ord(char) >= 65 and ord(char)<= 90:
             nbcar = tabfreq[ord(char) - 65]
             if ord(char) not in traites:
