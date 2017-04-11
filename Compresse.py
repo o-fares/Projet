@@ -33,7 +33,7 @@ def creerFilePriorite(tabfreq):
     file = FilePrio([])
     traites = []
     for char in texte:
-        A = Arbre(None, Noeud(char), None)
+        A = Arbre(Arbre(None, None, None), Noeud(char), Arbre(None, None, None))
         if ord(char) >= 65 and ord(char)<= 90:
             nbcar = tabfreq[ord(char) - 65]
             if ord(char) not in traites:
@@ -46,6 +46,17 @@ def creerFilePriorite(tabfreq):
                 traites += [ord(char)]
     return file
 
+def creerArbreCodage(fileprio):
+    while not fileprio.estVide():
+        Paire1 = fileprio.teteFilePrio()
+        fileprio.queueFilePrio()
+        if fileprio.estVide():
+            return Paire1.getElement()
+        Paire2 = fileprio.teteFilePrio()
+        fileprio.queueFilePrio()
+        new = Paire(Arbre(Paire1.getElement(), Noeud(-1), Paire2.getElement()), Paire1.getPriorite() + Paire2.getPriorite())
+        fileprio.ajout(new)
+        
 file = creerFilePriorite(creerTabFreq(texte))
 
 
