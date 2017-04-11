@@ -1,6 +1,8 @@
 # classe FilePrio
 
 from Paire import * # à voir selon le nom du fichier où il y a la classe paire
+from Arbre import *
+
 class FilePrio:
     """classe file d'attente"""
     def __init__(self, fileprio):
