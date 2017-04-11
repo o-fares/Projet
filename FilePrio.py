@@ -41,10 +41,4 @@ class FilePrio:
                     break
                 elif paire.getPriorite() > self.fileprio[len(self.fileprio)-1].getPriorite():
                     self.fileprio.insert(len(self.fileprio), paire)
-                    
-a = FilePrio([Paire("C", 1), Paire("A", 2), Paire("B", 5)])
-b = Paire("B", 6)
-c = FilePrio([])
-c.ajout(b)
-c.afficher2()
-a.queueFilePrio().afficher()
+
