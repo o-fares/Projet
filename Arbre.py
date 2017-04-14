@@ -23,17 +23,14 @@ class Arbre():
 
     def getFd(self):
         """Retourne la valeur du fils droit """
-        assert (not self.estVide())
         return self.fd
 
     def getFg(self):
         """Retourne la valeur du fils gauche"""
-        assert (not self.estVide())
         return self.fg
 
     def getRacine(self):
         """Renvoie la racine de l'arbre"""
-        assert(not self.estVide())
         return self.racine
 
     def getValRac(self):
