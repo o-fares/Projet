@@ -9,10 +9,10 @@ Réaliser le codage de Huffmann
 - module compresse qui donne les fonctions permettant de lire un texte/le compresser/le décompresser 
 /!\ ce n'est pas une classe   
 détail des fonctions:
-    - lireFichier(nomFichier)
-    - creerTabFreq(texte, nbcar)
-    - creerFilePriorite(tabfreq, nbcar)
-    - creeArbreCodage(fileprio)
+    - lireFichier(nomFichier) ✓
+    - creerTabFreq(texte, nbcar) ✓
+    - creerFilePriorite(tabfreq, nbcar) ✓
+    - creeArbreCodage(fileprio) ✓
     - creerTabCodes(arbrehufman, code, tabcodes)
     - coderTexte(texte, tabcodes)
     - decoderTexte(textecode, arbrehufman)
