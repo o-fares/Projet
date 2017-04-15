@@ -12,39 +12,59 @@ def lireFichier(nomFichier):
     texte = fo.read()
     return texte
 
-def creerTabFreq(texte):
-    """retourne le nombre d'occurences de la lettre char dans texte"""
-    listefreq = [0]*52
-    maj = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-    min = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-    for chr in texte:
-        if chr in maj:
-            listefreq[ord(chr)-65] += 1
-        elif chr in min:
-            listefreq[ord(chr)-71] += 1
-    return listefreq
+def minuscule(char):
+    """renvoie True si le caractère est une minuscule"""
+    if ord(char)>= 65 and ord(char) <= 90:
+        return True
+    return False
 
+def majuscule(char):
+    """renvoie True si le caractère est une majuscule"""
+    if ord(char) >= 97 and ord(char) <= 122:
+        return True
+    return False
+
+def creerTabFreq(texte, nbcar):
+    """retourne le nombre d'occurences de la lettre chr dans texte"""
+    # à utiliser avec nbcar = 53
+    listefreq = [0]*nbcar
+    for chr in texte:
+        if minuscule(chr):
+            # minuscules
+            listefreq[ord(chr) - 65] += 1
+        elif majuscule(chr):
+            # majuscules
+            listefreq[ord(chr) - 71] += 1
+        elif ord(chr) == 32:
+            # espace
+            listefreq[nbcar - 1] += 1
+    return listefreq
 texte = lireFichier("data.txt")
 
-print(creerTabFreq(texte))
+print(creerTabFreq(texte, 53))
 
-def creerFilePriorite(tabfreq):
+def creerFilePriorite(tabfreq, nbcar):
     """créer la file de priorité composé d'éléments (arbre du caractère, nb occurences)"""
-    file = FilePrio([])
+    fileprio = FilePrio([])
     traites = []
     for char in texte:
         A = Arbre(Arbre(None, None, None), Noeud(char), Arbre(None, None, None))
-        if ord(char) >= 65 and ord(char)<= 90:
-            nbcar = tabfreq[ord(char) - 65]
+        if minuscule(char):
+            freq = tabfreq[ord(char) - 65]
             if ord(char) not in traites:
-                file.ajout(Paire(A, nbcar))
+                fileprio.ajout(Paire(A, freq))
                 traites += [ord(char)]
-        elif ord(char) >= 97 and ord(char) <= 122:
-            nbcar = tabfreq[ord(char) - 71]
+        elif majuscule(char):
+            freq = tabfreq[ord(char) - 71]
             if ord(char) not in traites:
-                file.ajout(Paire(A, nbcar))
+                fileprio.ajout(Paire(A, freq))
                 traites += [ord(char)]
-    return file
+        elif ord(char) == 32:
+            freq = tabfreq[nbcar - 1]
+            if ord(char) not in traites:
+                fileprio.ajout(Paire(A, freq))
+                traites += [ord(char)]
+    return fileprio
 
 def creerArbreCodage(fileprio):
     while not fileprio.estVide():
@@ -57,7 +77,7 @@ def creerArbreCodage(fileprio):
         new = Paire(Arbre(Paire1.getElement(), Noeud(-1), Paire2.getElement()), Paire1.getPriorite() + Paire2.getPriorite())
         fileprio.ajout(new)
         
-file = creerFilePriorite(creerTabFreq(texte))
+file = creerFilePriorite(creerTabFreq(texte, 53), 53)
 
 
 file.afficher2()
