@@ -83,7 +83,14 @@ def creerTabCode(arbrehufman, code, tabCode) :
     else :
         return tabCode + creerTabCode(arbrehufman.getFg(), code + "0", tabCode) + creerTabCode(arbrehufman.getFd(), code + "1", tabCode)
  
-
+def coderTexte(texte, tabcodes):
+    """algorithme qui renvoie le texte codé"""
+    code = ""
+    for char in texte:
+        for i in range(len(tabcodes)):
+            if tabcodes[i].getElement() == char:
+                code += tabcodes[i].getPriorite()
+    return code
 
 file = creerFilePriorite(creerTabFreq(texte, 53), 53)
 file.afficher2()
@@ -93,3 +100,4 @@ tabCode = creerTabCode(arbre,"", [])
 for i in range (len(tabCode)) :
     tabCode[i].afficher()
 
+print(coderTexte(texte, tabCode)
