@@ -77,7 +77,19 @@ def creerArbreCodage(fileprio):
         new = Paire(Arbre(Paire1.getElement(), Noeud(-1), Paire2.getElement()), Paire1.getPriorite() + Paire2.getPriorite())
         fileprio.ajout(new)
         
+def creerTabCode(arbrehufman, code, tabCode) :
+    if arbrehufman.estFeuille() :
+        return [Paire(arbrehufman.getValRac(), code)]
+    else :
+        return tabCode + creerTabCode(arbrehufman.getFg(), code + "0", tabCode) + creerTabCode(arbrehufman.getFd(), code + "1", tabCode)
+ 
+
+
 file = creerFilePriorite(creerTabFreq(texte, 53), 53)
-
-
 file.afficher2()
+arbre = creerArbreCodage(file)
+
+tabCode = creerTabCode(arbre,"", [])
+for i in range (len(tabCode)) :
+    tabCode[i].afficher()
+
