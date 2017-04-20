@@ -39,9 +39,6 @@ def creerTabFreq(texte, nbcar):
             # espace
             listefreq[nbcar - 1] += 1
     return listefreq
-texte = lireFichier("data.txt")
-
-print(creerTabFreq(texte, 53))
 
 def creerFilePriorite(tabfreq, nbcar):
     """créer la file de priorité composé d'éléments (arbre du caractère, nb occurences)"""
@@ -113,6 +110,11 @@ def decoderTexte(textecode, arbrehufman):
             start = start2
     return decode
 
+def tauxcompression(texte):
+    """renvoie le taux de compression en %"""
+    taux = 100 * len(coderTexte(texte, creerTabCode(creerArbreCodage(creerFilePriorite(creerTabFreq(texte, 53), 53)), "", []))) / (8*(len(texte)-1))
+    return taux
+
 file = creerFilePriorite(creerTabFreq(texte, 53), 53)
 file.afficher2()
 arbre = creerArbreCodage(file)
@@ -121,6 +123,9 @@ tabCode = creerTabCode(arbre,"", [])
 for i in range (len(tabCode)) :
     tabCode[i].afficher()
 
+texte = lireFichier("data.txt")
+print(creerTabFreq(texte, 53))
 textecode = str(coderTexte(texte, tabCode))
 print(textecode)
 print(decoderTexte(textecode, arbre))
+print(tauxcompression(texte)
