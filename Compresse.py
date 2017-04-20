@@ -98,7 +98,6 @@ def decoderTexte(textecode, arbrehufman):
     start = arbrehufman
     decode = ""
     while i != len(textecode):
-
         courant = textecode[i]
         i += 1
         if courant == '0':
