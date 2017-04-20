@@ -92,6 +92,28 @@ def coderTexte(texte, tabcodes):
                 code += tabcodes[i].getPriorite()
     return code
 
+def decoderTexte(textecode, arbrehufman):
+    """renvoie le texte décodé"""
+    i = 0
+    start = arbrehufman
+    decode = ""
+    while i != len(textecode):
+
+        courant = textecode[i]
+        i += 1
+        if courant == '0':
+            start2 = start.getFg()
+        elif courant == '1':
+            start2 = start.getFd()
+        else :
+            return "Erreur de codage"
+        if start2.getValRac() != -1 :
+            decode += start2.getValRac()
+            start = arbrehufman
+        else :
+            start = start2
+    return decode
+
 file = creerFilePriorite(creerTabFreq(texte, 53), 53)
 file.afficher2()
 arbre = creerArbreCodage(file)
@@ -101,3 +123,6 @@ for i in range (len(tabCode)) :
     tabCode[i].afficher()
 
 print(coderTexte(texte, tabCode)
+
+textecode = "11011100010011101001110"
+print(decoderTexte(textecode, arbre))
