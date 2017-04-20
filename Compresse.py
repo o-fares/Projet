@@ -121,7 +121,6 @@ tabCode = creerTabCode(arbre,"", [])
 for i in range (len(tabCode)) :
     tabCode[i].afficher()
 
-print(coderTexte(texte, tabCode)
-
-textecode = "11011100010011101001110"
+textecode = str(coderTexte(texte, tabCode))
+print(textecode)
 print(decoderTexte(textecode, arbre))
