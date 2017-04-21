@@ -9,7 +9,8 @@ class TestCompresse(unittest.TestCase) :
     """classe de tests pour tester le module Compresse.py"""
 
     def setUp(self) :
-        self.texte1 = lireFichier("data.txt")
+        self.texte0 = lireFichier("data.txt")
+        self.texte1 = "Chabadabada"
         self.tabFreq1 = creerTabFreq(self.texte1, 53)
         self.file1 = creerFilePriorite(self.tabFreq1, 53)
         self.arbre1 = creerArbreCodage(self.file1)
