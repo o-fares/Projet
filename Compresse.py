@@ -1,16 +1,17 @@
 # module compresse contenant plusieurs fonctions détaillées dans le pdf
 
-from re import *
-from Arbre import *
 from FilePrio import *
 from Paire import *
 from Noeud import *
+
 
 def lireFichier(nomFichier):
     """lit un fichier compris dans le même dossier"""
     fo = open(nomFichier, 'r')
     texte = fo.read()
+    fo.close()
     return texte
+
 
 def creerTabFreq(texte, nbcar):
     """retourne le nombre d'occurences de la lettre chr dans texte"""
@@ -21,15 +22,17 @@ def creerTabFreq(texte, nbcar):
         listefreq[ord(chr)] += 1
     return listefreq
 
+
 def creerFilePriorite(tabfreq, nbcar):
     """retourne la file de priorité des lettres du textes selon leur nb d'occurrences"""
-    fileprio= FilePrio([])
-    for i in range (nbcar) :
-        if tabfreq[i] != 0 :
+    fileprio = FilePrio([])
+    for i in range(nbcar):
+        if tabfreq[i] != 0:
             char = chr(i)
             A = Arbre(Arbre(None, None, None), Noeud(char), Arbre(None, None, None))
             fileprio.ajout(Paire(A, tabfreq[i]))
     return fileprio
+
 
 def creerArbreCodage(fileprio):
     """crée l'arbre correspondant à la file de priorité"""
@@ -40,16 +43,20 @@ def creerArbreCodage(fileprio):
             return Paire1.getElement()
         Paire2 = fileprio.teteFilePrio()
         fileprio.queueFilePrio()
-        new = Paire(Arbre(Paire1.getElement(), Noeud(-1), Paire2.getElement()), Paire1.getPriorite() + Paire2.getPriorite())
+        new = Paire(Arbre(Paire1.getElement(), Noeud(-1), Paire2.getElement()),
+                    Paire1.getPriorite() + Paire2.getPriorite())
         fileprio.ajout(new)
-        
-def creerTabCode(arbrehufman, code, tabCode) :
+
+
+def creerTabCode(arbrehufman, code, tabCode):
     """créer une table de codes (lettre, code)"""
-    if arbrehufman.estFeuille() :
+    if arbrehufman.estFeuille():
         return [Paire(arbrehufman.getValRac(), code)]
-    else :
-        return tabCode + creerTabCode(arbrehufman.getFg(), code + "0", tabCode) + creerTabCode(arbrehufman.getFd(), code + "1", tabCode)
- 
+    else:
+        return tabCode + creerTabCode(arbrehufman.getFg(), code + "0", tabCode) + creerTabCode(arbrehufman.getFd(),
+                                                                                               code + "1", tabCode)
+
+
 def coderTexte(texte, tabcodes):
     """algorithme qui renvoie le texte codé"""
     code = ""
@@ -58,6 +65,7 @@ def coderTexte(texte, tabcodes):
             if tabcodes[i].getElement() == char:
                 code += tabcodes[i].getPriorite()
     return code
+
 
 def decoderTexte(textecode, arbrehufman):
     """renvoie le texte décodé"""
@@ -71,33 +79,19 @@ def decoderTexte(textecode, arbrehufman):
             start2 = start.getFg()
         elif courant == '1':
             start2 = start.getFd()
-        else :
+        else:
             return "Erreur de codage"
-        if start2.getValRac() != -1 :
+        if start2.getValRac() != -1:
             decode += start2.getValRac()
             start = arbrehufman
-        else :
+        else:
             start = start2
     return decode
 
+
 def tauxcompression(texte):
     """renvoie le taux de compression en %"""
-    taux = 100 * len(coderTexte(texte, creerTabCode(creerArbreCodage(creerFilePriorite(creerTabFreq(texte, 256), 256)), "", []))) / (8*(len(texte)-1))
+    taux = 100 * len(
+        coderTexte(texte, creerTabCode(creerArbreCodage(creerFilePriorite(creerTabFreq(texte, 256), 256)), "", []))) / (
+           8 * (len(texte) - 1))
     return taux
-
-texte = lireFichier("data.txt")
-
-print(creerTabFreq(texte, 256))
-
-file = creerFilePriorite(creerTabFreq(texte, 256), 256)
-file.afficher2()
-arbre = creerArbreCodage(file)
-
-tabCode = creerTabCode(arbre,"", [])
-for i in range (len(tabCode)) :
-    tabCode[i].afficher()
-
-textecode = coderTexte(texte, tabCode)
-print(textecode)
-print(decoderTexte(textecode, arbre))
-print(tauxcompression(texte))
