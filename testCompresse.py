@@ -113,7 +113,6 @@ class TestCompresse(unittest.TestCase) :
         d = Paire(Arbre(Arbre(None,None,None),Noeud('b'),Arbre(None,None,None)),2)
         e = Paire(Arbre(Arbre(None,None,None),Noeud('a'),Arbre(None,None,None)),5)
         H = [a,b,c,d,e]
-        value = self.file1
         test = True
         for i in range(len(H)):
             if not(creerFilePriorite(self.tabFreq1, 256).fileprio[i].getPriorite() == H[i].getPriorite() and
