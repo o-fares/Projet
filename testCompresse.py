@@ -39,7 +39,99 @@ class TestCompresse(unittest.TestCase) :
         self.tabCode4 = creerTabCode(self.arbre4, "", [])
         self.texteCode4 = coderTexte(self.texte4, self.tabCode4)
         self.texteDecode4 = decoderTexte(self.texteCode4, self.arbre4)
+        
+        self.texte5 = ""
+        # pour tester creerArbreCodage
+        self.vide = Arbre(None, None, None)
+        self.node1 = Arbre(self.vide, Noeud('a'), self.vide)
+        self.node2 = Arbre(self.vide, Noeud('b'), self.vide)
+        self.node3 = Arbre(self.vide, Noeud('c'), self.vide)
+        self.node4 = Arbre(self.vide, Noeud('d'), self.vide)
+        self.node5 = Arbre(self.vide, Noeud('h'), self.vide)
+        self.arbre = Arbre(self.node1, Noeud(-1), self.node2)
+        self.node6 = Arbre(self.node5, Noeud(-1), self.node3)
+        self.node7 = Arbre(self.node6, Noeud(-1), self.node4)
+        self.node8 = Arbre(self.node2, Noeud(-1), self.node7)
+        self.tree1 = Arbre(self.node1, Noeud(-1), self.node8)
+        self.tree4 = Arbre(self.node2, Noeud(-1), self.node1)
+        
+    def testLireFichier(self):
+        expected = self.texte1
+        value = lireFichier("data.txt")
+        self.assertTrue(value == expected)
+        
+    def testErreurCreerTab(self):
+        self.assertRaises(AssertionError, creerTabFreq, self.texte5, 256)
+        
+    def testCreerTabFreq1(self):
+        value = self.tabFreq1
+        expected = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2,
+                    0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        self.assertTrue(value == expected)
+    
+    def testCreerTabFreq2(self):
+        value = creerTabFreq(self.texte3, 256)
+        expected = [1] * 256
+        self.assertEqual(value, expected)
+        
+    def testCreerArbre1(self):
+        value = self.arbre1.ParcoursInfixe()
+        expected = self.tree1.ParcoursInfixe()
+        self.assertTrue(value == expected)
 
+    def testCreerArbre2(self):
+        value = self.arbre4.ParcoursInfixe()
+        expected = self.tree4.ParcoursInfixe()
+        self.assertTrue(value == expected)
+        
+    def testCreerTabCode1(self):
+        expected = [('b', '0'), ('a', '1')]
+        value = []
+        tabCode = self.tabCode4
+        for i in range(len(tabCode)):
+            value += [(tabCode[i].getElement(), tabCode[i].getPriorite())]
+        self.assertTrue(value == expected)  
+        
+    def testCreerTabCode2(self):
+        expected = [('a', '0'), ('b', '10'), ('h', '1100'), ('C', '1101'), ('d', '111')]
+        value = []
+        tabCode = self.tabCode1
+        for i in range(len(tabCode)):
+            value += [(tabCode[i].getElement(), tabCode[i].getPriorite())]
+        self.assertTrue(value == expected)  
+    
+    def testFilePrio(self):
+        a = Paire(Arbre(Arbre(None,None,None),Noeud('h'),Arbre(None,None,None)),1)
+        b = Paire(Arbre(Arbre(None,None,None),Noeud('C'),Arbre(None,None,None)),1)
+        c = Paire(Arbre(Arbre(None,None,None),Noeud('d'),Arbre(None,None,None)),2)
+        d = Paire(Arbre(Arbre(None,None,None),Noeud('b'),Arbre(None,None,None)),2)
+        e = Paire(Arbre(Arbre(None,None,None),Noeud('a'),Arbre(None,None,None)),5)
+        H = [a,b,c,d,e]
+        value = self.file1
+        test = True
+        for i in range(len(H)):
+            if not(creerFilePriorite(self.tabFreq1, 256).fileprio[i].getPriorite() == H[i].getPriorite() and
+                       (creerFilePriorite(self.tabFreq1, 256).fileprio[i].getElement().getValRac() == H[i].getElement().getValRac())):
+                test = False
+        self.assertTrue(test)
+
+    def testFilePrio2(self):
+        a = Paire(Arbre(Arbre(None,None,None),Noeud('b'),Arbre(None,None,None)),1)
+        b = Paire(Arbre(Arbre(None,None,None),Noeud('a'),Arbre(None,None,None)),1)
+        P = [a,b]
+        test = True
+        for i in range(len(P)):
+            if not(creerFilePriorite(self.tabFreq4, 256).fileprio[i].getPriorite() == P[i].getPriorite() and
+                       (creerFilePriorite(self.tabFreq4, 256).fileprio[i].getElement().getValRac() == P[i].getElement().getValRac())):
+                test = False
+        self.assertTrue(test)
+        
     def testDecoder1(self):
         value = self.texteDecode1
         expected = "Chabadabada"
@@ -79,37 +171,6 @@ class TestCompresse(unittest.TestCase) :
         value = self.texteCode4
         expected = "10"
         self.assertTrue(value == expected)
-
-    def testFilePrio(self):
-        a = Paire(Arbre(Arbre(None,None,None),Noeud('h'),Arbre(None,None,None)),1)
-        b = Paire(Arbre(Arbre(None,None,None),Noeud('C'),Arbre(None,None,None)),1)
-        c = Paire(Arbre(Arbre(None,None,None),Noeud('d'),Arbre(None,None,None)),2)
-        d = Paire(Arbre(Arbre(None,None,None),Noeud('b'),Arbre(None,None,None)),2)
-        e = Paire(Arbre(Arbre(None,None,None),Noeud('a'),Arbre(None,None,None)),5)
-        H = [a,b,c,d,e]
-        value = self.file1
-        test = True
-        for i in range(len(H)):
-            if not(creerFilePriorite(self.tabFreq1, 256).fileprio[i].getPriorite() == H[i].getPriorite() and
-                       (creerFilePriorite(self.tabFreq1, 256).fileprio[i].getElement().getValRac() == H[i].getElement().getValRac())):
-                test = False
-        self.assertTrue(test)
-
-    def testFilePrio2(self):
-        a = Paire(Arbre(Arbre(None,None,None),Noeud('b'),Arbre(None,None,None)),1)
-        b = Paire(Arbre(Arbre(None,None,None),Noeud('a'),Arbre(None,None,None)),1)
-        P = [a,b]
-        test = True
-        for i in range(len(P)):
-            if not(creerFilePriorite(self.tabFreq4, 256).fileprio[i].getPriorite() == P[i].getPriorite() and
-                       (creerFilePriorite(self.tabFreq4, 256).fileprio[i].getElement().getValRac() == P[i].getElement().getValRac())):
-                test = False
-        self.assertTrue(test)
-
-
-
-
-
 
 if __name__ == '__main__':
     unittest.main()
