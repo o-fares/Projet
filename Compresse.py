@@ -23,7 +23,7 @@ def creerTabFreq(texte, nbcar):
 def creerFilePriorite(tabfreq, nbcar):
     fileprio= FilePrio([])
     for i in range (nbcar) :
-        if tabfreq[i] != [0] :
+        if tabfreq[i] != 0 :
             char = chr(i)
             A = Arbre(Arbre(None, None, None), Noeud(char), Arbre(None, None, None))
             fileprio.ajout(Paire(A, tabfreq[i]))
