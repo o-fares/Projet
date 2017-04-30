@@ -85,7 +85,7 @@ texte = lireFichier("data.txt")
 
 print(creerTabFreq(texte, 256))
 
-file = creerFilePriorite(creerTabFreq2(texte, 256), 256)
+file = creerFilePriorite(creerTabFreq(texte, 256), 256)
 file.afficher2()
 arbre = creerArbreCodage(file)
 
