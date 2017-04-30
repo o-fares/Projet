@@ -23,7 +23,7 @@ def creerTabFreq(texte, nbcar):
 def creerFilePriorite(tabfreq, nbcar):
     fileprio= FilePrio([])
     for i in range (nbcar) :
-        if tabfreq[i] != [0] :
+        if tabfreq[i] != 0 :
             char = chr(i)
             A = Arbre(Arbre(None, None, None), Noeud(char), Arbre(None, None, None))
             fileprio.ajout(Paire(A, tabfreq[i]))
@@ -85,7 +85,7 @@ texte = lireFichier("data.txt")
 
 print(creerTabFreq(texte, 256))
 
-file = creerFilePriorite(creerTabFreq2(texte, 256), 256)
+file = creerFilePriorite(creerTabFreq(texte, 256), 256)
 file.afficher2()
 arbre = creerArbreCodage(file)
 
