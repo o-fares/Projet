@@ -78,7 +78,7 @@ def decoderTexte(textecode, arbrehufman):
 
 def tauxcompression(texte):
     """renvoie le taux de compression en %"""
-    taux = 100 * len(coderTexte(texte, creerTabCode(creerArbreCodage(creerFilePriorite2(creerTabFreq2(texte, 256), 256)), "", []))) / (8*(len(texte)-1))
+    taux = 100 * len(coderTexte(texte, creerTabCode(creerArbreCodage(creerFilePriorite(creerTabFreq(texte, 256), 256)), "", []))) / (8*(len(texte)-1))
     return taux
 
 texte = lireFichier("data.txt")
