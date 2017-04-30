@@ -15,12 +15,14 @@ def lireFichier(nomFichier):
 def creerTabFreq(texte, nbcar):
     """retourne le nombre d'occurences de la lettre chr dans texte"""
     # à utiliser avec nbcar = 256
+    assert texte != ""
     listefreq = [0] * nbcar
     for chr in texte:
         listefreq[ord(chr)] += 1
     return listefreq
 
 def creerFilePriorite(tabfreq, nbcar):
+    """retourne la file de priorité des lettres du textes selon leur nb d'occurrences"""
     fileprio= FilePrio([])
     for i in range (nbcar) :
         if tabfreq[i] != 0 :
@@ -30,6 +32,7 @@ def creerFilePriorite(tabfreq, nbcar):
     return fileprio
 
 def creerArbreCodage(fileprio):
+    """crée l'arbre correspondant à la file de priorité"""
     while not fileprio.estVide():
         Paire1 = fileprio.teteFilePrio()
         fileprio.queueFilePrio()
@@ -41,6 +44,7 @@ def creerArbreCodage(fileprio):
         fileprio.ajout(new)
         
 def creerTabCode(arbrehufman, code, tabCode) :
+    """créer une table de codes (lettre, code)"""
     if arbrehufman.estFeuille() :
         return [Paire(arbrehufman.getValRac(), code)]
     else :
