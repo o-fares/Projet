@@ -14,7 +14,9 @@ class TestCompresse(unittest.TestCase) :
         self.texteDecode1 = decoderTexte(self.texteCode1, self.arbre1)
 
         self.texte2 = "Tout language fini est régulier."
-        self.arbre2 = creerArbreCodage(creerFilePriorite(creerTabFreq(self.texte2,256),256))
+        self.tabFreq2 = creerTabFreq(self.texte2,256)
+        self.file2 = creerFilePriorite(self.tabFreq2,256)
+        self.arbre2 = creerArbreCodage(self.file2)
         self.tabCode2 = creerTabCode(self.arbre2,"",[])
         self.texteCode2 = coderTexte(self.texte2,self.tabCode2)
         self.texteDecode2 = decoderTexte(self.texteCode2,self.arbre2)
@@ -23,7 +25,9 @@ class TestCompresse(unittest.TestCase) :
         for i in range(256):
             texte += chr(i)
         self.texte3 = texte
-        self.arbre3 = creerArbreCodage(creerFilePriorite(creerTabFreq(self.texte3, 256), 256))
+        self.tabFreq3 = creerTabFreq(self.texte3,256)
+        self.file3 = creerFilePriorite(self.tabFreq3,256)
+        self.arbre3 = creerArbreCodage(self.file3)
         self.tabCode3 = creerTabCode(self.arbre3, "", [])
         self.texteCode3 = coderTexte(self.texte3, self.tabCode3)
         self.texteDecode3 = decoderTexte(self.texteCode3, self.arbre3)
@@ -36,12 +40,10 @@ class TestCompresse(unittest.TestCase) :
         self.texteCode4 = coderTexte(self.texte4, self.tabCode4)
         self.texteDecode4 = decoderTexte(self.texteCode4, self.arbre4)
 
-
     def testDecoder1(self):
         value = self.texteDecode1
         expected = "Chabadabada"
         self.assertTrue(value == expected)
-
 
     def testDecoder2(self):
         value = self.texteDecode2
@@ -58,8 +60,7 @@ class TestCompresse(unittest.TestCase) :
         expected = "ab"
         self.assertTrue(value == expected)
 
-
-    def testCoderTexte1(self):
+    def testCoderTexte(self):
         value = self.texteCode1
         expected = "11011100010011101001110"
         self.assertTrue(value == expected)
@@ -79,7 +80,7 @@ class TestCompresse(unittest.TestCase) :
         expected = "10"
         self.assertTrue(value == expected)
 
-    def testFilePrio1(self):
+    def testFilePrio(self):
         a = Paire(Arbre(Arbre(None,None,None),Noeud('h'),Arbre(None,None,None)),1)
         b = Paire(Arbre(Arbre(None,None,None),Noeud('C'),Arbre(None,None,None)),1)
         c = Paire(Arbre(Arbre(None,None,None),Noeud('d'),Arbre(None,None,None)),2)
@@ -112,4 +113,5 @@ class TestCompresse(unittest.TestCase) :
 
 if __name__ == '__main__':
     unittest.main()
+
 
