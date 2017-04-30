@@ -12,7 +12,7 @@ def lireFichier(nomFichier):
     texte = fo.read()
     return texte
 
-def creerTabFreq2(texte, nbcar):
+def creerTabFreq(texte, nbcar):
     """retourne le nombre d'occurences de la lettre chr dans texte"""
     # à utiliser avec nbcar = 256
     listefreq = [0] * nbcar
@@ -20,7 +20,7 @@ def creerTabFreq2(texte, nbcar):
         listefreq[ord(chr)] += 1
     return listefreq
 
-def creerFilePriorite2(tabfreq, nbcar):
+def creerFilePriorite(tabfreq, nbcar):
     fileprio= FilePrio([])
     for i in range (nbcar) :
         if tabfreq[i] != [0] :
@@ -83,9 +83,9 @@ def tauxcompression(texte):
 
 texte = lireFichier("data.txt")
 
-print(creerTabFreq2(texte, 256))
+print(creerTabFreq(texte, 256))
 
-file = creerFilePriorite2(creerTabFreq2(texte, 256), 256)
+file = creerFilePriorite(creerTabFreq2(texte, 256), 256)
 file.afficher2()
 arbre = creerArbreCodage(file)
 
