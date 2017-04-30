@@ -1,14 +1,11 @@
-# classe de tests FilePrio
 import unittest
-from copy import *
-from Paire import *
-
 from FilePrio import *
+
 
 class TestFilePrio(unittest.TestCase):
 
     def testQueue(self):
-        a = FilePrio([Paire(2,4),Paire(3,2),Paire(6,1)])
+        a = FilePrio([Paire(2, 4), Paire(3, 2),  Paire(6, 1)])
         a.queueFilePrio()
         value1 = a.fileprio[0].getElement()
         value2 = a.fileprio[0].getPriorite()
@@ -20,9 +17,8 @@ class TestFilePrio(unittest.TestCase):
         expected4 = 1
         self.assertTrue(value1 == expected1 and (value2 == expected2) and value3 == expected3 and value4 == expected4)
 
-
     def testTete(self):
-        a = FilePrio([Paire(2,4),Paire(3,2),Paire(2,3)])
+        a = FilePrio([Paire(2, 4), Paire(3, 2), Paire(2, 3)])
         value1 = a.teteFilePrio().getElement()
         expected1 = 2
         value2 = a.teteFilePrio().getPriorite()
@@ -34,12 +30,12 @@ class TestFilePrio(unittest.TestCase):
         self.assertTrue(a.estVide())
 
     def testEstNonVide(self):
-        a = FilePrio([Paire(2,4),Paire(3,2),Paire(2,3)])
+        a = FilePrio([Paire(2, 4), Paire(3, 2), Paire(2, 3)])
         self.assertFalse(a.estVide())
 
     def testAjoutVide(self):
         a = FilePrio([])
-        b = Paire(1,2)
+        b = Paire(1, 2)
         a.ajout(b)
         expected1 = 1
         expected2 = 2
@@ -48,8 +44,8 @@ class TestFilePrio(unittest.TestCase):
         self.assertTrue(value1 == expected1 and value2 == expected2)
 
     def testAjout1(self):
-        a = FilePrio([Paire('B',2),Paire('C',3)])
-        c = Paire('A',1)
+        a = FilePrio([Paire('B', 2), Paire('C', 3)])
+        c = Paire('A', 1)
         a.ajout(c)
         value1 = a.fileprio[0].getElement()
         value2 = a.fileprio[0].getPriorite()
@@ -78,6 +74,6 @@ class TestFilePrio(unittest.TestCase):
         self.assertTrue(value1 is expected1 and value2 is expected2)
 
 
-
 if __name__ == '__main__':
     unittest.main()
+
