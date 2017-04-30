@@ -12,55 +12,21 @@ def lireFichier(nomFichier):
     texte = fo.read()
     return texte
 
-def minuscule(char):
-    """renvoie True si le caractère est une minuscule"""
-    if ord(char)>= 65 and ord(char) <= 90:
-        return True
-    return False
-
-def majuscule(char):
-    """renvoie True si le caractère est une majuscule"""
-    if ord(char) >= 97 and ord(char) <= 122:
-        return True
-    return False
-
 def creerTabFreq(texte, nbcar):
     """retourne le nombre d'occurences de la lettre chr dans texte"""
-    # à utiliser avec nbcar = 53
-    listefreq = [0]*nbcar
+    # à utiliser avec nbcar = 256
+    listefreq = [0] * nbcar
     for chr in texte:
-        if minuscule(chr):
-            # minuscules
-            listefreq[ord(chr) - 65] += 1
-        elif majuscule(chr):
-            # majuscules
-            listefreq[ord(chr) - 71] += 1
-        elif ord(chr) == 32:
-            # espace
-            listefreq[nbcar - 1] += 1
+        listefreq[ord(chr)] += 1
     return listefreq
 
 def creerFilePriorite(tabfreq, nbcar):
-    """créer la file de priorité composé d'éléments (arbre du caractère, nb occurences)"""
-    fileprio = FilePrio([])
-    traites = []
-    for char in texte:
-        A = Arbre(Arbre(None, None, None), Noeud(char), Arbre(None, None, None))
-        if minuscule(char):
-            freq = tabfreq[ord(char) - 65]
-            if ord(char) not in traites:
-                fileprio.ajout(Paire(A, freq))
-                traites += [ord(char)]
-        elif majuscule(char):
-            freq = tabfreq[ord(char) - 71]
-            if ord(char) not in traites:
-                fileprio.ajout(Paire(A, freq))
-                traites += [ord(char)]
-        elif ord(char) == 32:
-            freq = tabfreq[nbcar - 1]
-            if ord(char) not in traites:
-                fileprio.ajout(Paire(A, freq))
-                traites += [ord(char)]
+    fileprio= FilePrio([])
+    for i in range (nbcar) :
+        if tabfreq[i] != [0] :
+            char = chr(i)
+            A = Arbre(Arbre(None, None, None), Noeud(char), Arbre(None, None, None))
+            fileprio.ajout(Paire(A, tabfreq[i]))
     return fileprio
 
 def creerArbreCodage(fileprio):
@@ -112,10 +78,14 @@ def decoderTexte(textecode, arbrehufman):
 
 def tauxcompression(texte):
     """renvoie le taux de compression en %"""
-    taux = 100 * len(coderTexte(texte, creerTabCode(creerArbreCodage(creerFilePriorite(creerTabFreq(texte, 53), 53)), "", []))) / (8*(len(texte)-1))
+    taux = 100 * len(coderTexte(texte, creerTabCode(creerArbreCodage(creerFilePriorite(creerTabFreq(texte, 256), 256)), "", []))) / (8*(len(texte)-1))
     return taux
 
-file = creerFilePriorite(creerTabFreq(texte, 53), 53)
+texte = lireFichier("data.txt")
+
+print(creerTabFreq(texte, 256))
+
+file = creerFilePriorite(creerTabFreq2(texte, 256), 256)
 file.afficher2()
 arbre = creerArbreCodage(file)
 
@@ -123,9 +93,7 @@ tabCode = creerTabCode(arbre,"", [])
 for i in range (len(tabCode)) :
     tabCode[i].afficher()
 
-texte = lireFichier("data.txt")
-print(creerTabFreq(texte, 53))
-textecode = str(coderTexte(texte, tabCode))
+textecode = coderTexte(texte, tabCode)
 print(textecode)
 print(decoderTexte(textecode, arbre))
-print(tauxcompression(texte)
+print(tauxcompression(texte))
