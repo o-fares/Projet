@@ -47,5 +47,12 @@ class Arbre():
             return False
         else :
             return self.getFd().estVide() and self.getFg().estVide()
+        
+    def ParcoursInfixe(self):
+        """on utilise cette fonction pour les tests"""
+        if not self.estVide():
+            self.getFg().ParcoursInfixe()
+            print(self.racine.getVal())
+            self.getFd().ParcoursInfixe()
 
 
