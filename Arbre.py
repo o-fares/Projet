@@ -50,9 +50,13 @@ class Arbre():
         
     def ParcoursInfixe(self):
         """on utilise cette fonction pour les tests"""
-        if not self.estVide():
-            self.getFg().ParcoursInfixe()
-            print(self.racine.getVal())
-            self.getFd().ParcoursInfixe()
+        texte = ""
+        if self.estFeuille():
+            texte += str(self.racine.getVal())
+            return texte
+        else:
+            texte += self.getFd().ParcoursInfixe()
+            texte += self.getFg().ParcoursInfixe()
+            return texte
 
 
