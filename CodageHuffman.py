@@ -112,10 +112,14 @@ class Arbre():
 
     def ParcoursInfixe(self):
         """on utilise cette fonction pour les tests"""
-        if not self.estVide():
-            self.getFg().ParcoursInfixe()
-            print(self.racine.getVal())
-            self.getFd().ParcoursInfixe()
+        texte = ""
+        if self.estFeuille():
+            texte += str(self.racine.getVal())
+            return texte
+        else:
+            texte += self.getFd().ParcoursInfixe()
+            texte += self.getFg().ParcoursInfixe()
+            return texte
 
 ####################################################################
 
@@ -516,7 +520,7 @@ class TestCompresse(unittest.TestCase):
         self.vide = Arbre(None, None, None)
         self.node1 = Arbre(self.vide, Noeud('a'), self.vide)
         self.node2 = Arbre(self.vide, Noeud('b'), self.vide)
-        self.node3 = Arbre(self.vide, Noeud('c'), self.vide)
+        self.node3 = Arbre(self.vide, Noeud('C'), self.vide)
         self.node4 = Arbre(self.vide, Noeud('d'), self.vide)
         self.node5 = Arbre(self.vide, Noeud('h'), self.vide)
         self.arbre = Arbre(self.node1, Noeud(-1), self.node2)
