@@ -1,6 +1,6 @@
 # classe FilePrio
 
-from Paire import * # à voir selon le nom du fichier où il y a la classe paire
+from Paire import * 
 from Arbre import *
 
 class FilePrio:
@@ -9,25 +9,26 @@ class FilePrio:
         self.fileprio = fileprio
 
     def estVide(self):
-        """renvoie True si la fileprio est vide"""
+        """renvoie True si la fileprio est vide,False sinon"""
         return self.fileprio == []
 
     def afficher2(self):
-    """afficher la file prio"""
-    for i in range(len(self.fileprio)):
-        if type(self.fileprio[i].getElement()) == Arbre:
-            print([(self.fileprio[i].getElement().getFg(), self.fileprio[i].getElement().getValRac(), self.fileprio[i].getElement().getFd()), self.fileprio[i].getPriorite()])
-        else:
-            print([(self.fileprio[i].getElement(), self.fileprio[i].getPriorite())])
+        """afficher la file prio"""
+        for i in range(len(self.fileprio)):
+            if type(self.fileprio[i].getElement()) == Arbre:
+                print([(self.fileprio[i].getElement().getFg(), self.fileprio[i].getElement().getValRac(),
+                        self.fileprio[i].getElement().getFd()), self.fileprio[i].getPriorite()])
+            else:
+                print([(self.fileprio[i].getElement(), self.fileprio[i].getPriorite())])
 
     def teteFilePrio(self):
-        """Renvoie le premier element de la file"""
-        assert not self.estVide()
+        """Renvoie le premier élement de la file"""
+        assert (not self.estVide())
         return self.fileprio[0]
 
     def queueFilePrio(self):
-        """"Supprime le premier element de la file"""
-        assert not self.estVide()
+        """Supprime le premier élément de la file """
+        assert (not self.estVide())
         self.fileprio = self.fileprio[1:]
 
     def ajout(self, paire):
@@ -41,4 +42,5 @@ class FilePrio:
                     break
                 elif paire.getPriorite() > self.fileprio[len(self.fileprio)-1].getPriorite():
                     self.fileprio.insert(len(self.fileprio), paire)
+
 
