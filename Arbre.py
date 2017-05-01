@@ -3,7 +3,7 @@ class Arbre():
     def __init__(self, A1, n, A2):
         self.fg = A1
         self.fd = A2
-        self.racine =  n
+        self.racine = n
 
     def estVide(self):
         """Renvoie True si l'arbre est vide, False sinon"""
